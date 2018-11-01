@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "184766081095",
+    "firebase_url": "https://holisticjourney-4150e.firebaseio.com",
+    "project_id": "holisticjourney-4150e",
+    "storage_bucket": "holisticjourney-4150e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184766081095:android:ba26133c0bbcc1e6",
+        "android_client_info": {
+          "package_name": "com.kkpl.holisticJourney"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "184766081095-ims1tg2ptpi6g7j0okooajco02imlruh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj9_RL-s79JyncizmnNg1icHStGMfnNnU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
