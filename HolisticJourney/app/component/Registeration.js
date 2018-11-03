@@ -8,17 +8,19 @@ import CardSection from './common/CardSection';
 import Input from './common/Input';
 
 export default class Registration extends Component {
-
-    state = {
-        mobile: '',
-        pin: '',
-        name: '',
-        city: '', 
-        address: '',
-        error:'',
-        isLoading: false,
-        isLoggedIn: false,
-    };
+    constructor(props) {
+        super(props);
+        state = {
+            mobile: '',
+            pin: '',
+            name: '',
+            city: '', 
+            address: '',
+            error:'',
+            isLoading: false,
+            isLoggedIn: false,
+        }
+}
     
     render(){
         return (

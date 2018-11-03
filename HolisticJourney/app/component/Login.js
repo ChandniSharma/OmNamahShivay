@@ -7,16 +7,22 @@ import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Input from './common/Input';
 
-
 export default class Login extends Component {
 
-    state = {
-        mobile: '',
-        pin: '',
-        error:'',
-        isLoading: false,
-        isLoggedIn: false,
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            mobile: '',
+            pin: '',
+            error:'',
+            response:[{'id':1}],
+            isLoading: false,
+            isLoggedIn: false,
+        }
+
+    }
+    
     
     render(){
         return (
@@ -67,25 +73,22 @@ export default class Login extends Component {
            mobile: '',
            pin: '' 
         })
-     
      }
- 
      onLoginFail(){
          this.setState({error:'AuthenticationFailed'});
          this.setState({
              isLoading:false,
           })
-       
      }
- 
      onClickSignin(){
  
          console.log(' Signin ');
          // Validate empty condition 
          // Call api 
          const  {email,password} = this.state;
- 
          this.setState({isLoading:true,error:'' }) ;
+         console.log(' sign in ', this.state.response);
+         this.props.navigation.navigate('TabNavigator',{response:this.state.response})
         
   }
   onClickSignup(){

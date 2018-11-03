@@ -27,7 +27,7 @@ if (btnDirection ==='left') {
 const styles={
     buttonLeftStyle:{
        flex: 0.5,
-        backgroundColor:'#fff',
+        backgroundColor:'#ffffff',
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 13,
@@ -38,7 +38,7 @@ const styles={
     },
     buttonRightStyle:{
         flex: 0.5,
-         backgroundColor:'#fff',
+         backgroundColor:'#ffffff',
          borderColor: 'gray',
          borderWidth: 1,
          borderRadius: 13,
@@ -53,7 +53,7 @@ const styles={
       fontSize: 18,
       borderColor: 'black',
       alignSelf: 'center',
-      backgroundColor: 'fff',
+      backgroundColor: '#ffffff',
       paddingTop: 10,
       paddingBottom: 10,
     }
