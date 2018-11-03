@@ -3,6 +3,8 @@
 
 export const msgMobileNumber = 'Please enter correct mobile number';
 export const msgPin = 'Please enter your Pin';
+export const msgPinLength = 'Please enter your 4 digit Pin';
+
 export const msgConfirmPin = 'Please enter your pin in confirm pin';
 export const msgPinNotSame = 'Please enter same pin in confirm pin';
 

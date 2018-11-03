@@ -9,6 +9,7 @@ import Input from './common/Input';
 import ButtonWithIcon from './common/ButtonWithIcon';
 import homeStyle from '../styleFiles/home.style';
 import Picker from 'react-native-picker';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 
 export default class Home extends Component {
    
@@ -30,13 +31,14 @@ export default class Home extends Component {
         }
     }
     componentDidMount(){
-       
     }
        
     render(){
         return (
             <View style={loginStyle.Container}> 
                 <Header />  
+                <KeyboardAwareScrollView style={loginStyle.Container}>
+
                 <Card>
             <CardSection>
             <ButtonWithIcon iconName={''} whenPress={this.onClickCity.bind(this)}>
@@ -79,7 +81,7 @@ export default class Home extends Component {
                     </CardSection>
                    
                 </Card>
-               
+                </KeyboardAwareScrollView>
                 </View>
         );
 

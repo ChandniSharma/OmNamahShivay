@@ -7,6 +7,7 @@ import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Input from './common/Input';
 import * as constants from '../Constants/Constants';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 
 export default class Login extends Component {
 
@@ -26,16 +27,15 @@ export default class Login extends Component {
     
     render(){
         return (
-                      
             <View style={loginStyle.Container}> 
                 <Header />  
-                <ScrollView style={top=-100}> 
+                <KeyboardAwareScrollView> 
                 <Card>
             <CardSection>
                 <Input 
                 label={'Mobile'}
                 prefix={'+91'}
-                placeholder={'+918518016290'}
+                placeholder={'Mobile Number'}
                 value={this.state.mobile}
                 charLimit={10}
                 keyboardType='number-pad'
@@ -46,7 +46,7 @@ export default class Login extends Component {
         <CardSection>
             <Input  
             secureTextEntry
-            label={'pin'}
+            label={'Pin'}
             placeholder={'pin'}
             value={this.state.pin}
             charLimit={4}
@@ -77,7 +77,7 @@ export default class Login extends Component {
                 </Button>
             </CardSection>
     </Card>
-    </ScrollView>
+    </KeyboardAwareScrollView>
     </View>
     
         );
@@ -103,7 +103,7 @@ export default class Login extends Component {
          const  {mobile,pin, confirmPin} = this.state;
          let alertMessage = '';
 
-         if (mobile.length === 0 || mobile.length<10) {
+         if (mobile.length === 0 || mobile.length!=10) {
            alertMessage = constants.msgMobileNumber;
          } else {
              if (pin.length === 0) {
@@ -115,10 +115,14 @@ export default class Login extends Component {
                      if (pin !== confirmPin) {
                          alertMessage = constants.msgPinNotSame;
                      } else {
-                         // Call api for login 
+                         if (pin.length != 4) {
+                             alertMessage = constants.msgPinLength;
+                         } else {
+                            // Call api for login 
                      this.setState({isLoading:true,error:'' }) ;
                      this.props.navigation.navigate('TabNavigator',{response:this.state.response})
-                     }
+                         }
+                    }
                   }
              }
          }
@@ -132,8 +136,8 @@ export default class Login extends Component {
                 { cancelable: false }
               )
          }
-         
-        //  this.props.navigation.navigate('TabNavigator',{response:this.state.response})
+        // Temp  
+          this.props.navigation.navigate('TabNavigator',{response:this.state.response})
 
   }
     onClickSignup(){

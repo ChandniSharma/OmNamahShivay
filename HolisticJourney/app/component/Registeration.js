@@ -7,6 +7,7 @@ import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Input from './common/Input';
 import * as constants from '../Constants/Constants';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 
 export default class Registration extends Component {
     constructor(props) {
@@ -24,51 +25,51 @@ export default class Registration extends Component {
     
     render(){
         return (
-            <ScrollView>
+           
             <View style={loginStyle.Container}> 
                 <Header />  
+          <KeyboardAwareScrollView style={loginStyle.container}>
                 <Card style={{backgroundColor: 'pink'}}>
+                    <CardSection>
+                    <Input 
+                    label={'Name'}
+                    placeholder={'Chandni'}
+                    value={this.state.name}
+                    onChangeText={text => this.setState({name:text})}
+                    />
+                </CardSection>
                 <CardSection>
-                <Input 
-                label={'Name'}
-                placeholder={'Chandni'}
-                value={this.state.name}
-                onChangeText={text => this.setState({name:text})}
-                />
-          </CardSection>
-            <CardSection>
-                <Input 
-                label={'Mobile'}
-                prefix={'+91'}
-                placeholder={'+918518016290'}
-                value={this.state.mobile}
-                keyboardType='number-pad'
-                onChangeText={text => this.setState({mobile:text})}
-                />
-          </CardSection>
+                    <Input 
+                    label={'Mobile'}
+                    prefix={'+91'}
+                    placeholder={'+918518016290'}
+                    value={this.state.mobile}
+                    keyboardType='number-pad'
+                    onChangeText={text => this.setState({mobile:text})}
+                    />
+            </CardSection>
          
-        <CardSection>
-            <Input 
-            secureTextEntry
-            label={'pin'}
-            placeholder={'pin'}
-            value={this.state.pin}
-            keyboardType='number-pad'
-            onChangeText={text => this.setState({pin:text})}
+                <CardSection>
+                    <Input 
+                    secureTextEntry
+                    label={'pin'}
+                    placeholder={'pin'}
+                    value={this.state.pin}
+                    keyboardType='number-pad'
+                    onChangeText={text => this.setState({pin:text})}
+                    />
+            </CardSection>
+                <CardSection>
+                    <Input
+                    secureTextEntry
+                    label={'Confim pin'}
+                    placeholder={'Confirm pin'}
+                    value={this.state.confirmPin}
+                    keyboardType='number-pad'
+                    onChangeText={text => this.setState({confirmPin:text})}
 
-            />
-        </CardSection>
-        <CardSection>
-            <Input 
-            secureTextEntry
-            label={'Confim pin'}
-            placeholder={'Confirm pin'}
-            value={this.state.confirmPin}
-            keyboardType='number-pad'
-            onChangeText={text => this.setState({confirmPin:text})}
-
-            />
-        </CardSection>
+                    />
+               </CardSection>
 {/* <Text style={styles.textErrorStyle}> {this.state.error}</Text> */}
 
            <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
@@ -79,9 +80,10 @@ export default class Registration extends Component {
                  Cancel 
                 </Button>
             </CardSection>
-    </Card>
-    </View>
-     </ScrollView>
+        </Card>
+        </KeyboardAwareScrollView>
+        </View>
+     
         );
 
     }
@@ -123,9 +125,13 @@ export default class Registration extends Component {
                         if (pin !== confirmPin) {
                             alertMessage = constants.msgPinNotSame;
                         } else {
+                            if (pin.length != 4) {
+                                alertMessage = constants.msgPinLength;
+                            } else {
                             // Call api for login 
                         this.setState({isLoading:true,error:'' }) ;
                         this.props.navigation.navigate('TabNavigator',{response:this.state.response})
+                            }
                         }
                     }
                 }

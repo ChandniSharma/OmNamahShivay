@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 
-export default class Setting extends Component {
+export default class History extends Component {
 
     render(){
         return(
             <View>
                 <Text>
-                  Setting
+                History
                 </Text>
             </View>
         );

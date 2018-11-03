@@ -7,6 +7,7 @@ import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Input from './common/Input';
 import * as constants from '../Constants/Constants';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 
 export default class Profile extends Component {
     constructor(props) {
@@ -26,8 +27,10 @@ export default class Profile extends Component {
      render(){
         return (
             <View style={loginStyle.Container}> 
-                <Header />  
-                <Card style={{backgroundColor: 'pink'}}>
+                <Header /> 
+                <KeyboardAwareScrollView style={loginStyle.container}>
+
+                <Card>
                 <CardSection>
                 <Input 
                 label={'Name'}
@@ -78,6 +81,7 @@ export default class Profile extends Component {
                 </Button>
             </CardSection>
     </Card>
+    </KeyboardAwareScrollView>
     </View>
         );
     }
@@ -93,17 +97,22 @@ export default class Profile extends Component {
             } else {
                 if (pin.length === 0) {
                     alertMessage = constants.msgPin;
-                } else {
+                }  if (pin.length <=3 || pin.length>4 ) {
+                    alertMessage = constants.msgPinLength;
+                 } else {
                     if(confirmPin.length === 0){
                     alertMessage = constants.confirmPin;
                     }else{
                         if (pin !== confirmPin) {
                             alertMessage = constants.msgPinNotSame;
                         } else {
+                            if (pin.length != 4) {
+                                alertMessage = constants.msgPinLength;
+                            } else {
                             // Call api for update 
                         this.setState({isLoading:true,error:'' }) ;
                         alertMessage = constants.msgProfileUpdate;
-
+                            }
                         }
                     }
                 }

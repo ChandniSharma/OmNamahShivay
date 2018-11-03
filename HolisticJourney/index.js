@@ -11,8 +11,8 @@ import { createBottomTabNavigator } from 'react-navigation';
 import Home from './app/component/Home';
 import HomeDetail from './app/component/HomeDetail';
 import Profile from './app/component/Profile';
-import Schedule from './app/component/Schedule';
-import Setting from './app/component/Setting';
+import History from './app/component/History';
+import Volentier from './app/component/Volentier';
 import AddPatient from './app/component/AddPatient';
 
 const HomeStack = StackNavigator({
@@ -27,9 +27,10 @@ const HomeStack = StackNavigator({
 
 const TabNavigator =  createBottomTabNavigator({
   Home: HomeStack,
+  Volentier:Volentier,
+  History: History,
   Profile: Profile,
-  Schedule: Schedule,
-  Setting: Setting,
+ 
 },
 {
   navigationOptions: ({ navigation }) => ({
