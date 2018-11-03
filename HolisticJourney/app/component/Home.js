@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import Header from './common/Header';
-import loginStyle from './styleFiles/login.style';
+import loginStyle from '../styleFiles/login.style';
 import Button from './common/Button';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Input from './common/Input';
+import ButtonWithIcon from './common/ButtonWithIcon';
+import homeStyle from '../styleFiles/home.style';
+import Picker from 'react-native-picker';
 
 export default class Home extends Component {
    
@@ -14,55 +17,69 @@ export default class Home extends Component {
 
         this.state = {
             // response:this.navigation.state.params.response,
-            city: '',
-            date: '',
-            slots: '',
+            PickerValueHolder : '',
+            arrayPatient:[],
+            city: ['Knw', 'Bpl', 'Indore'],
+            subCity:['Baikunth Nagar', 'Arera Colony', 'Nanda Nagar'],
+            date: ['3 Nov 2018','8 Nov 2018','7 Dec 2018'],
+            slots: ['2:00PM-3:00PM','4:00PM-6:00PM','7:30:00PM-9:00PM'],
             error:'',
             response:[{'id':1}],
             isLoading: false,
             isLoggedIn: false,
         }
     }
+    componentDidMount(){
+       
+    }
+       
     render(){
         return (
             <View style={loginStyle.Container}> 
                 <Header />  
-                <Card style={{backgroundColor: 'pink'}}>
+                <Card>
             <CardSection>
-                <Input 
-                label={'City'}
-                placeholder={''}
-                value={this.state.city}
-                onChangeText={text => this.setState({city:text})}
-                />
+            <ButtonWithIcon iconName={''} whenPress={this.onClickCity.bind(this)}>
+                            City
+            </ButtonWithIcon>
           </CardSection>
-        
-        <CardSection>
-            <Input 
-            label={'Date'}
-            placeholder={''}
-            value={this.state.date}
-            onChangeText={text => this.setState({date:text})}
-            />
-        </CardSection>
-        <CardSection>
-            <Input 
-            label={'Slots'}
-            placeholder={''}
-            value={this.state.slots}
-            onChangeText={text => this.setState({slots:text})}
-            />
-        </CardSection>
+          <CardSection>
+            <ButtonWithIcon iconName={''} whenPress={this.onClickSubCity.bind(this)}>
+                            Sub-city
+            </ButtonWithIcon>
+          </CardSection>
+          <CardSection>
+            <ButtonWithIcon iconName={''} whenPress={this.onClickType.bind(this)}>
+                            Type
+            </ButtonWithIcon>
+          </CardSection>
+          <CardSection>
+            <ButtonWithIcon iconName={''} whenPress={this.onClickTypeDate.bind(this)}>
+                            Dates available
+            </ButtonWithIcon>
+          </CardSection>
+          <CardSection>
+            <ButtonWithIcon iconName={''} whenPress={this.onClickTime.bind(this)}>
+                            Time
+            </ButtonWithIcon>
+          </CardSection>
 
-            {/* <Text style={styles.textErrorStyle}> {this.state.error}</Text> */}
+            <Text style={[homeStyle.textStyle, color='green']}> Slot available</Text>
+
+            <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
+                            <Button btnDirection={'left'} whenPress={this.onClickAddPatient.bind(this)}>
+                            Add Patient
+                            </Button>
+                    </CardSection>
 
                     <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
                             <Button btnDirection={'left'} whenPress={this.onClickBook.bind(this)}>
                             Book
                             </Button>
-                           
-                        </CardSection>
+                    </CardSection>
+                   
                 </Card>
+               
                 </View>
         );
 
@@ -77,4 +94,24 @@ export default class Home extends Component {
         this.props.navigation.navigate('HomeDetail',{response:this.state.response})
        
  }
+ onClickAddPatient(){
+     console.log('On click add patient');
+     this.props.navigation.navigate('AddPatient',{response:this.state.response})
+
+ }
+ onClickCity(){
+        
+  }
+  onClickSubCity(){
+        
+}
+onClickType(){
+        
+}
+onClickTypeDate(){
+        
+}
+onClickTime(){
+        
+}
 }

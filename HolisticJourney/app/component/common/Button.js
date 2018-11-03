@@ -33,7 +33,8 @@ const styles={
         borderRadius: 13,
         marginLeft: 30, 
         marginRight: 5,
-        height:40
+        height:40,
+       
     //  alignSelf: 'stretch',
     },
     buttonRightStyle:{
@@ -45,17 +46,17 @@ const styles={
          marginLeft: 5, 
          marginRight: 30,
          height:40
+        
      //  alignSelf: 'stretch',
      },
      
     textStyle:{
-      
       fontSize: 18,
       borderColor: 'black',
       alignSelf: 'center',
-      backgroundColor: '#ffffff',
-      paddingTop: 10,
+      paddingTop: 7,
       paddingBottom: 10,
+      color:'#656565',
     }
 }
 export default Button;

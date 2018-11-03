@@ -1,7 +1,7 @@
 export default{
     viewStyle: {
-        top:10,
-        flex: 0.1,
+        top:30,
+        height:100,
         backgroundColor:'#ffffff',
         alignItems: 'center',
         justifyContent: 'center',

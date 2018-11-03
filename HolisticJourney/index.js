@@ -13,10 +13,12 @@ import HomeDetail from './app/component/HomeDetail';
 import Profile from './app/component/Profile';
 import Schedule from './app/component/Schedule';
 import Setting from './app/component/Setting';
+import AddPatient from './app/component/AddPatient';
 
 const HomeStack = StackNavigator({
   Home: Home,
   HomeDetail: HomeDetail,
+  AddPatient:AddPatient
 },{
   initialRouteName: 'Home',
   headerMode: 'none',

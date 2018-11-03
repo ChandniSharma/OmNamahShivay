@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import { TextInput, View } from 'react-native';
+import { TextInput, View,Alert, ScrollView} from 'react-native';
 import Header from './common/Header';
-import loginStyle from './styleFiles/login.style';
+import loginStyle from '../styleFiles/login.style';
 import Button from './common/Button';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Input from './common/Input';
+import * as constants from '../Constants/Constants';
 
 export default class Registration extends Component {
     constructor(props) {
         super(props);
-        state = {
+       this.state = {
             mobile: '',
             pin: '',
             name: '',
-            city: '', 
-            address: '',
+           confirmPin: '',
             error:'',
             isLoading: false,
             isLoggedIn: false,
@@ -24,6 +24,7 @@ export default class Registration extends Component {
     
     render(){
         return (
+            <ScrollView>
             <View style={loginStyle.Container}> 
                 <Header />  
                 <Card style={{backgroundColor: 'pink'}}>
@@ -38,38 +39,36 @@ export default class Registration extends Component {
             <CardSection>
                 <Input 
                 label={'Mobile'}
+                prefix={'+91'}
                 placeholder={'+918518016290'}
                 value={this.state.mobile}
+                keyboardType='number-pad'
                 onChangeText={text => this.setState({mobile:text})}
                 />
           </CardSection>
-          <CardSection>
-                <Input 
-                label={'City'}
-                placeholder={'Bhopal'}
-                value={this.state.city}
-                onChangeText={text => this.setState({city:text})}
-                />
-          </CardSection>
-          <CardSection>
-                <Input 
-                label={'Address'}
-                placeholder={'Address'}
-                value={this.state.address}
-                onChangeText={text => this.setState({address:text})}
-                />
-          </CardSection>
+         
         <CardSection>
             <Input 
             secureTextEntry
             label={'pin'}
             placeholder={'pin'}
             value={this.state.pin}
+            keyboardType='number-pad'
             onChangeText={text => this.setState({pin:text})}
 
             />
         </CardSection>
+        <CardSection>
+            <Input 
+            secureTextEntry
+            label={'Confim pin'}
+            placeholder={'Confirm pin'}
+            value={this.state.confirmPin}
+            keyboardType='number-pad'
+            onChangeText={text => this.setState({confirmPin:text})}
 
+            />
+        </CardSection>
 {/* <Text style={styles.textErrorStyle}> {this.state.error}</Text> */}
 
            <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
@@ -82,6 +81,7 @@ export default class Registration extends Component {
             </CardSection>
     </Card>
     </View>
+     </ScrollView>
         );
 
     }
@@ -104,13 +104,45 @@ export default class Registration extends Component {
           })
      }
  
-     onClickRegister(){
-         console.log(' register ');
-         // Validate empty condition 
-         // Call api 
-         const  {email,password} = this.state;
-         this.setState({isLoading:true,error:'' }) ;
-  }
+     onClickRegister(){         
+        const  {mobile,pin, confirmPin,name} = this.state;
+        let alertMessage='';
+
+        if (name.length === 0) {
+            alertMessage = constants.msgName;
+        } else {
+            if (mobile.length === 0 || mobile.length<10) {
+            alertMessage = constants.msgMobileNumber;
+            } else {
+                if (pin.length === 0) {
+                    alertMessage = constants.msgPin;
+                } else {
+                    if(confirmPin.length === 0){
+                    alertMessage = constants.confirmPin;
+                    }else{
+                        if (pin !== confirmPin) {
+                            alertMessage = constants.msgPinNotSame;
+                        } else {
+                            // Call api for login 
+                        this.setState({isLoading:true,error:'' }) ;
+                        this.props.navigation.navigate('TabNavigator',{response:this.state.response})
+                        }
+                    }
+                }
+            }
+    }
+    if (alertMessage.length>1) {
+        Alert.alert(
+            '',
+            alertMessage,
+            [
+              {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            ],
+            { cancelable: false }
+          )
+     }
+       //  this.props.navigation.navigate('TabNavigator',{response:this.state.response})
+ }
 
   onClickCancel(){
     console.log(' cancel ');
