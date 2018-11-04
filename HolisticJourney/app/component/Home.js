@@ -48,30 +48,58 @@ export default class Home extends Component {
                 subcitySelected: undefined,
                 items2: [
                     {
-                        label: '3 Nov 2018',
+                        label: 'MP Nagar',
                         value: 'football',
                     },
                     {
-                        label: '8 Nov 2018',
+                        label: 'Arera colony',
                         value: 'baseball',
                     },
                     {
-                        label: '7 Dec 2018',
+                        label: 'Habibganj',
                         value: 'hockey',
                     },
                 ],
-                items3: [
+                typeSelected: undefined,
+                    items3:[
+                        {
+                            label: 'A',
+                            value: '01',
+                        },{
+                            label: 'B',
+                            value: '02',
+                        },
+                    ],
+                dateSelected:undefined,
+                    items4:[
+                        {
+                            label: '20 Nov 2018',
+                            value: 'date1',
+                        },{
+                            label: '21 Nov 2018',
+                            value: 'date2',
+                        },
+                        {
+                            label: '28 Nov 2018',
+                            value: 'date3',
+                        },{
+                            label: '29 Nov 2018',
+                            value: 'date4',
+                        },
+                    ],
+                    timeSelected: undefined,
+                items5: [
                     {
                         label: '2:00PM-3:00PM',
-                        value: 'football',
+                        value: 'T1',
                     },
                     {
                         label: '4:00PM-6:00PM',
-                        value: 'baseball',
+                        value: 'T2',
                     },
                     {
                         label: '7:30:00PM-9:00PM',
-                        value: 'hockey',
+                        value: 'T3',
                     },
                 ],
 
@@ -95,92 +123,145 @@ export default class Home extends Component {
     render() {
         return (
             <View style={loginStyle.container}>
-                <Text>Name?</Text>
-                <TextInput
-                    ref={(el) => {
-                        this.inputRefs.name = el;
-                    }}
-                    returnKeyType="next"
-                    enablesReturnKeyAutomatically
-                    onSubmitEditing={() => {
-                        this.inputRefs.picker.togglePicker();
-                    }}
-                    style={homeStyle.inputIOS}
-                    blurOnSubmit={false}
+                         <Header />
+
+                         <KeyboardAwareScrollView>
+
+                         </KeyboardAwareScrollView>
+                        <View style={{marginTop:'15%', backgroundColor: 'yellow' }} />
+                   <View style={homeStyle.innerContainer}>
+                        <Text style={homeStyle.textTitle}>Please select you city</Text>
+                        <RNPickerSelect
+                            placeholder={{
+                                label: 'Select city',
+                                value: null,
+                                fontSize: 18,
+                                backgroundColor:'yellow'
+                            }}
+                            
+                            placeholderTextColor={'red'}
+                            items={this.state.items1}
+                            onValueChange={(value) => {
+                                this.setState({
+                                    citySelected: value,
+                                });
+                            }}
+                            onUpArrow={() => {
+                                //this.inputRefs.name.focus();
+                            }}
+                            onDownArrow={() => {
+                                this.inputRefs.picker2.togglePicker();
+                            }}
+                            style={{padding: 20,}}
+                            value={this.state.citySelected}
+                            ref={(el) => {
+                                this.inputRefs.picker = el;
+                            }}
+                        />
+
+                        <View style={{ paddingVertical:'10%', backgroundColor:'' }} />
+
+                        <Text style={homeStyle.textTitle}>Please select your subCity</Text>
+                        <RNPickerSelect
+                            placeholder={{
+                                label: 'Select subcity',
+                                value: null,
+                            }}
+                            items={this.state.items2}
+                            onValueChange={(value) => {
+                                this.setState({
+                                    subcitySelected: value,
+                                });
+                            }}
+                            onUpArrow={() => {
+                                this.inputRefs.picker.togglePicker();
+                            }}
+                            onDownArrow={() => {
+                                this.inputRefs.picker3.togglePicker();
+                            }}
+                            style={ homeStyle.inputIOS }
+                            value={this.state.subcitySelected}
+                            ref={(el) => {
+                                this.inputRefs.picker2 = el;
+                            }}
                 />
-
-                <View style={{ paddingVertical: 5 }} />
-
-                <Text>What&rsquo;s your favorite color?</Text>
-                <RNPickerSelect
-                    placeholder={{
-                        label: 'Select a color...',
-                        value: null,
-                    }}
-                    items={this.state.items1}
-                    onValueChange={(value) => {
-                        this.setState({
-                            citySelected: value,
-                        });
-                    }}
-                    onUpArrow={() => {
-                        this.inputRefs.name.focus();
-                    }}
-                    onDownArrow={() => {
-                        this.inputRefs.picker2.togglePicker();
-                    }}
-                    style={homeStyle.inputIOS}
-                    value={this.state.citySelected}
-                    ref={(el) => {
-                        this.inputRefs.picker = el;
-                    }}
+                <Text style={homeStyle.textTitle}>Please select type</Text>
+                        <RNPickerSelect
+                            placeholder={{
+                                label: 'Select type',
+                                value: null,
+                            }}
+                            items={this.state.items3}
+                            onValueChange={(value) => {
+                                this.setState({
+                                    typeSelected: value,
+                                });
+                            }}
+                            onUpArrow={() => {
+                                this.inputRefs.picker2.togglePicker();
+                            }}
+                            onDownArrow={() => {
+                                this.inputRefs.picker4.togglePicker();
+                            }}
+                            style={ homeStyle.inputIOS }
+                            value={this.state.typeSelected}
+                            ref={(el) => {
+                                this.inputRefs.picker3 = el;
+                            }}
                 />
-
-                <View style={{ paddingVertical: 5 }} />
-
-                <Text>What&rsquo;s your favorite sport?</Text>
-                <RNPickerSelect
-                    placeholder={{
-                        label: 'Select a sport...',
-                        value: null,
-                    }}
-                    items={this.state.items2}
-                    onValueChange={(value) => {
-                        this.setState({
-                            subcitySelected: value,
-                        });
-                    }}
-                    onUpArrow={() => {
-                        this.inputRefs.picker.togglePicker();
-                    }}
-                    onDownArrow={() => {
-                        this.inputRefs.company.focus();
-                    }}
-                    style={ homeStyle.inputIOS }
-                    value={this.state.subcitySelected}
-                    ref={(el) => {
-                        this.inputRefs.picker2 = el;
-                    }}
+                <Text style={homeStyle.textTitle}>Please select date</Text>
+                        <RNPickerSelect
+                            placeholder={{
+                                label: 'Select date',
+                                value: null,
+                            }}
+                            items={this.state.items4}
+                            onValueChange={(value) => {
+                                this.setState({
+                                    dateSelected: value,
+                                });
+                            }}
+                            onUpArrow={() => {
+                                this.inputRefs.picker3.togglePicker();
+                            }}
+                            onDownArrow={() => {
+                                this.inputRefs.picker5.togglePicker();
+                            }}
+                            style={ homeStyle.inputIOS }
+                            value={this.state.dateSelected}
+                            ref={(el) => {
+                                this.inputRefs.picker4 = el;
+                            }}
                 />
-
-                <View style={{ paddingVertical: 5 }} />
-
-                <Text>Company?</Text>
-                <TextInput
-                    ref={(el) => {
-                        this.inputRefs.company = el;
-                    }}
-                    returnKeyType="go"
-                    enablesReturnKeyAutomatically
-                    style={homeStyle.inputIOS}
-                    onSubmitEditing={() => {
-                        Alert.alert('Success', 'Form submitted', [{ text: 'Okay', onPress: null }]);
-                    }}
-                />
+                <Text style={homeStyle.textTitle}>Please select type</Text>
+                                        <RNPickerSelect
+                                            placeholder={{
+                                                label: 'Select time',
+                                                value: null,
+                                            }}
+                                            items={this.state.items5}
+                                            onValueChange={(value) => {
+                                                this.setState({
+                                                    timeSelected: value,
+                                                });
+                                            }}
+                                            onUpArrow={() => {
+                                                this.inputRefs.picker4.togglePicker();
+                                            }}
+                                            onDownArrow={() => {
+                                                // this.inputRefs.picker4.togglePicker();
+                                            }}
+                                            style={ homeStyle.inputIOS }
+                                            value={this.state.timeSelected}
+                                            ref={(el) => {
+                                                this.inputRefs.picker5 = el;
+                                            }}
+                                />
+                <View style={{ paddingVertical: '5%', backgroundColor:'' }} />
             
-            <Text style={[homeStyle.textStyle, color='green']}> Slot available</Text>
+            {/* <Text style={[homeStyle.textStyle, color='green']}> Slot available</Text> */}
 
-            <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
+                   <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
                             <Button btnDirection={'left'} whenPress={this.onClickAddPatient.bind(this)}>
                             Add Patient
                             </Button>
@@ -191,6 +272,7 @@ export default class Home extends Component {
                             Book
                             </Button>
                     </CardSection>
+                </View>
                 </View>
         );
 

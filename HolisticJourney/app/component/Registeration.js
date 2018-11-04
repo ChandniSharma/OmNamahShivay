@@ -29,7 +29,7 @@ export default class Registration extends Component {
             <View style={loginStyle.Container}> 
                 <Header />  
           <KeyboardAwareScrollView style={loginStyle.container}>
-                <Card style={{backgroundColor: 'pink'}}>
+                <Card>
                     <CardSection>
                     <Input 
                     label={'Name'}

@@ -5,6 +5,10 @@ export default{
         margin: 20
         
       },
+      innerContainer:{
+        backgroundColor:'white',
+        
+      },
       textStyle:{
         padding: 10,
          alignItems: 'center',
@@ -21,6 +25,13 @@ export default{
         borderColor: 'gray',
         borderRadius: 4,
         backgroundColor: 'white',
-        color: 'black',
+        
+        // flex: 1,
     },
+    textTitle:{
+        // padding:10,
+        color: '#000000',
+        fontSize: 16,
+        backgroundColor: '#ffffff',
+       },
 }

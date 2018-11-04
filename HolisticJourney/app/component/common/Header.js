@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <View style = {styles.viewStyle}>
-        <Animatable.Text style={styles.textStyle} animation="zoomIn" iterationCount={1} direction="alternate" delay={1000}>
+        <Animatable.Text style={styles.textStyle} animation="pulse" iterationCount={2} direction="alternate" delay={1000}>
              Holistic Journey
         </Animatable.Text>
         </View>

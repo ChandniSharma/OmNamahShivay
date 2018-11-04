@@ -15,6 +15,9 @@ export const msgLogout = 'Are you sure to logout from the application';
 export const titleAlertLogout = 'Logout';
 export const msgProfileUpdate = 'Your profile update successfully.';
 
+// Add Patient view 
+export const msgPatientAddLimit = 'You can add only 5 patients';
+
 
 export const titleOk = 'Ok';
 export const titleCancel = 'Cancel';
