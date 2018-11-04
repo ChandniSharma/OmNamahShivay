@@ -14,7 +14,7 @@ import Profile from './app/component/Profile';
 import AppointmentList from './app/component/History/AppointmentList';
 import Volentierlist from './app/component/Volentier/VolentierList';
 import AddPatient from './app/component/AddPatient';
-
+import PickerEx from './app/component/PickerEx';
 const HomeStack = StackNavigator({
   Home: Home,
   Receipt: Receipt,
@@ -59,6 +59,7 @@ const AppNavigator = StackNavigator(
     {
       LoginScreen: { screen: Login },
       RegistrationScreen: { screen: Registration },
+      PickerEx: {screen: PickerEx},
       TabNavigator:{screen: TabNavigator}
    },
     {

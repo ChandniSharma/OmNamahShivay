@@ -13,15 +13,13 @@ constructor(props){
     super(props);
     this.state={
         arrayPatient:['a', 'b'],
+        placeName: '',
+        places: []
     }
-}
-state = {
-    placeName: '',
-    places: []
 }
 
 placeSubmitHandler = () => {
-    if(this.state.placeName.trim() === '') {
+    if(this.state.placeName.length === 0) {
     return;
     }
     this.setState(prevState => {
@@ -44,42 +42,55 @@ placeNameChangeHandler = (value) => {
 }
 
 placesOutput = () => {
-   return (
-    <FlatList style = { styles.listContainer }
-       data = { this.state.places }
-       keyExtractor={(item, index) => index.toString()}
-           renderItem = { info => (
-          <ListItem 
-                placeName={ info.item.value }
-           />
-         )}
-    />
-    )
-}
+    return (
+     <FlatList style = { styles.listContainer }
+        data = { this.state.places }
+        keyExtractor={(item, index) => index.toString()}
+            renderItem = { info => (
+           <ListItem 
+                 placeName={ info.item.value }
+                         onItemPressed={() => this.onItemDeleted(info.item.key)}
+            />
+          )}
+     />
+     )
+ }
+onItemDeleted = (key) => {
+    this.setState(prevState => {
+       return {
+          places: prevState.places.filter(place => {
+             return place.key !== key;
+       })
+     }
+     })
+ }
 
+render() {
+    return (
+     <View style={ styles.container }>
+     <Header />
+        <View style = { styles.inputContainer }>
+         <TextInput
+            placeholder = "Patient Name"
+            style = { styles.placeInput }
+                    value = { this.state.placeName }
+            onChangeText = { this.placeNameChangeHandler }
+         ></TextInput>
+         
+         <Button title = 'Add' 
+            style = { styles.placeButton }
+            onPress = { this.placeSubmitHandler }
+         />
+         </View>
+             <View style = { styles.listContainer }>
+         { this.placesOutput() }
+         </View>
+     </View>
+     );
+   }
+   onClickBack(){
+    this.props.navigation.navigate('Home',{arrayPatient:this.state.arrayPatient});
+   }
+ }
+   
 
-    render(){
-        return (
-            <View style={ styles.container }>
-               <View style = { styles.inputContainer }>
-                <TextInput
-                   placeholder = "Seach Places"
-                   style = { styles.placeInput }
-                           value = { this.state.placeName }
-                   onChangeText = { this.placeNameChangeHandler }
-                ></TextInput>
-                <Button title = 'Add' 
-                   style = { styles.placeButton }
-                   onPress = { this.placeSubmitHandler }
-                />
-                </View>
-                    <View style = { styles.listContainer }>
-                { this.placesOutput() }
-                </View>
-            </View>
-            );
-    }
-    onClickBack(){
-       this.props.navigation.navigate('Home',{arrayPatient:this.state.arrayPatient});
-    }
-}

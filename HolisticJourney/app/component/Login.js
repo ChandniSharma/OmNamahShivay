@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, View, Alert, ScrollView } from 'react-native';
+import { TextInput, View, Alert, ScrollView, concat } from 'react-native';
 import Header from './common/Header';
 import loginStyle from '../styleFiles/login.style';
 import Button from './common/Button';
@@ -137,7 +137,7 @@ export default class Login extends Component {
               )
          }
         // Temp  
-          this.props.navigation.navigate('TabNavigator',{response:this.state.response})
+          this.props.navigation.navigate('Home',{response:this.state.response})
 
   }
     onClickSignup(){

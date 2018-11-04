@@ -16,7 +16,7 @@ export default class AppointmentList extends Component {
 
              {"TokenID":"#123462", "Date":"18th September 2018","PersonCount":"2 Persons" ,"address":"45/1, Baikunth Nagar","City":"Bhopal", "time":"6:00pm-7:00pm"},
 
-             {"TokenID":"#123896", "Date":"12th September 2018","PersonCount":"1 Persons" ,"address":"45/1, Baikunth Nagar","City":"Bhopal", "time":"9:00pm-10:00pm"},
+             {"TokenID":"#123896", "Date":"12th October 2018","PersonCount":"1 Persons" ,"address":"45/1, Baikunth Nagar","City":"Bhopal", "time":"9:00pm-10:00pm"},
 
              {"TokenID":"#127656", "Date":"12th September 2018","PersonCount":"5 Persons" ,"address":"45/1, Baikunth Nagar","City":"Bhopal", "time":"4:00pm-5:00pm"},
 

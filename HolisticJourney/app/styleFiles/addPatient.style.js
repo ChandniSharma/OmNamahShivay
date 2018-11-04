@@ -15,5 +15,8 @@ export default{
     },
     placeButton: {
     width: '30%'
-    }
+    },
+    listContainer: {
+        width: '100%'
+        }
 }
