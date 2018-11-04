@@ -93,8 +93,7 @@ export default class Home extends Component {
         const  {email,password} = this.state;
         this.setState({isLoading:true,error:'' }) ;
         console.log(' Book ', this.state.response);
-        this.props.navigation.navigate('HomeDetail',{response:this.state.response})
-       
+        this.props.navigation.navigate('Receipt')
  }
  onClickAddPatient(){
      console.log('On click add patient');

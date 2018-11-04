@@ -9,15 +9,15 @@ import Login from './app/component/Login';
 import Registration from './app/component/Registeration';
 import { createBottomTabNavigator } from 'react-navigation';
 import Home from './app/component/Home';
-import HomeDetail from './app/component/HomeDetail';
+import Receipt from './app/component/Receipt';
 import Profile from './app/component/Profile';
-import History from './app/component/History';
-import Volentier from './app/component/Volentier';
+import AppointmentList from './app/component/History/AppointmentList';
+import Volentierlist from './app/component/Volentier/VolentierList';
 import AddPatient from './app/component/AddPatient';
 
 const HomeStack = StackNavigator({
   Home: Home,
-  HomeDetail: HomeDetail,
+  Receipt: Receipt,
   AddPatient:AddPatient
 },{
   initialRouteName: 'Home',
@@ -27,8 +27,8 @@ const HomeStack = StackNavigator({
 
 const TabNavigator =  createBottomTabNavigator({
   Home: HomeStack,
-  Volentier:Volentier,
-  History: History,
+  Volentierlist:Volentierlist,
+  AppointmentList: AppointmentList,
   Profile: Profile,
  
 },

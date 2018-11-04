@@ -11,7 +11,7 @@ const {buttonStyle, textStyle, container, imageDown } = styles;
                         <Text style={textStyle}> 
                         {children}
                         </Text>
-                        <Image source={require('../../assets/arrownext.png')} style={imageDown} />
+                        <Image source={require('../../assets/downArrow.png')} style={imageDown} />
 
                 </TouchableOpacity>
 
@@ -38,9 +38,9 @@ const styles={
     },
     imageDown:{
         
-       width: 40,
-       height: 40,
-       top: -40,
+       width: 32,
+       height:32,
+        top: -32,
        alignSelf: 'flex-end',
     },
      
@@ -49,7 +49,7 @@ const styles={
       fontSize: 18,
       borderColor: 'black',
       alignSelf: 'center',
-      backgroundColor: '#ffffff',
+     // backgroundColor: '#ffffff',
       paddingTop: 10,
       paddingBottom: 10,
     }
