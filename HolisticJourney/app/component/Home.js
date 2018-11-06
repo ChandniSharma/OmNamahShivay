@@ -1,282 +1,176 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, View, Text,Alert, TextInput} from 'react-native';
-import Header from './common/Header';
+import {TouchableOpacity, View, Text,Alert, TextInput, StyleSheet} from 'react-native';
+import Header from './Home/HeaderHome';
 import loginStyle from '../styleFiles/login.style';
 import Button from './common/Button';
-import Card from './common/Card';
+import Card from './Home/CardHome';
 import CardSection from './common/CardSection';
 import Input from './common/Input';
 import ButtonWithIcon from './common/ButtonWithIcon';
 import homeStyle from '../styleFiles/home.style';
-import RNPickerSelect from 'react-native-picker-select';
-
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
+ import SimplePicker from 'react-native-simple-picker';
+
+ const arrayCity = ['Bhopal', 'Indore', 'Khandwa'];
+ const arraySubCity = ['Baikunth Nagar', 'Arera Colony', 'Habibganj'];
+ const arrayType = ['A', 'B'];
+ const arrayDate = ['3 Nov 2018', '8 Nov 2018', '7 Dec 2018'];
+ const arrayTimeSlots = ['2:00PM-3:00PM', '4:00PM-6:00PM', '7:30:00PM-9:00PM'];
 
 export default class Home extends Component {
    
     constructor(props){
         super(props);
-        this.inputRefs = {};
+        
         this.state = {
             // response:this.navigation.state.params.response,
-            PickerValueHolder : '',
-            arrayPatient:[],
-            city: ['Knw', 'Bpl', 'Indore'],
-            subCity:['Baikunth Nagar', 'Arera Colony', 'Nanda Nagar'],
-            date: ['3 Nov 2018','8 Nov 2018','7 Dec 2018'],
-            slots: ['2:00PM-3:00PM','4:00PM-6:00PM','7:30:00PM-9:00PM'],
+            // city: ['Knw', 'Bpl', 'Indore'],
+            // subCity:['Baikunth Nagar', 'Arera Colony', 'Nanda Nagar'],
+            // date: ['3 Nov 2018','8 Nov 2018','7 Dec 2018'],
+            // slots: ['2:00PM-3:00PM','4:00PM-6:00PM','7:30:00PM-9:00PM'],
             error:'',
             response:[{'id':1}],
             isLoading: false,
             isLoggedIn: false,
-
-             citySelected: undefined,
-                items1: [
-                    {
-                        label: 'Khandwa',
-                        value: 'red',
-                    },
-                    {
-                        label: 'Bhopal',
-                        value: 'orange',
-                    },
-                    {
-                        label: 'Indore',
-                        value: 'blue',
-                    },
-                ],
-                subcitySelected: undefined,
-                items2: [
-                    {
-                        label: 'MP Nagar',
-                        value: 'football',
-                    },
-                    {
-                        label: 'Arera colony',
-                        value: 'baseball',
-                    },
-                    {
-                        label: 'Habibganj',
-                        value: 'hockey',
-                    },
-                ],
-                typeSelected: undefined,
-                    items3:[
-                        {
-                            label: 'A',
-                            value: '01',
-                        },{
-                            label: 'B',
-                            value: '02',
-                        },
-                    ],
-                dateSelected:undefined,
-                    items4:[
-                        {
-                            label: '20 Nov 2018',
-                            value: 'date1',
-                        },{
-                            label: '21 Nov 2018',
-                            value: 'date2',
-                        },
-                        {
-                            label: '28 Nov 2018',
-                            value: 'date3',
-                        },{
-                            label: '29 Nov 2018',
-                            value: 'date4',
-                        },
-                    ],
-                    timeSelected: undefined,
-                items5: [
-                    {
-                        label: '2:00PM-3:00PM',
-                        value: 'T1',
-                    },
-                    {
-                        label: '4:00PM-6:00PM',
-                        value: 'T2',
-                    },
-                    {
-                        label: '7:30:00PM-9:00PM',
-                        value: 'T3',
-                    },
-                ],
-
-            };
-    }
-    componentDidMount(){
-        setTimeout(() => {
-            this.setState({
-                citySelected: 'red',
-            });
-        }, 1000);
-
-        // // parent can also update the `items` prop
-        // setTimeout(() => {
-        //     this.setState({
-        //         items: this.state.items.concat([{ value: 'purple', label: 'Purple' }]),
-        //     });
-        // }, 2000);
+            selectedCity: 'Click here to select city',
+            selectedSubCity:'Click here to select subCity',
+            selectedDate: 'Click here to select date',
+            selectedTimeSlot:'Click here to select time',
+            selectedType:'Click here to select type',
+            isDateSelected:false,
+            isTimeSelected: false,
+        } 
     }
        
     render() {
         return (
-            <View style={loginStyle.container}>
-                         <Header />
+            <View style={loginStyle.Container}>
+                        <Header />
+            <KeyboardAwareScrollView style={homeStyle.scrollViewStyle}> 
+                <Card>
+            <CardSection>
+            <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+                  this.refs.pickerCity.show();
+                }}>
+                 {this.state.selectedCity}
+               </ButtonWithIcon>
+          </CardSection>    
+         
+          <CardSection>
+          <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+                  this.refs.pickerSubcity.show();
+                }}>
+                 {this.state.selectedSubCity}
+               </ButtonWithIcon>
+               
+          </CardSection>  
 
-                         <KeyboardAwareScrollView>
+          <CardSection>
+          <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+                  this.refs.pickerType.show();
+                }}>
+                 {this.state.selectedType}
+               </ButtonWithIcon>            
+              </CardSection>  
 
-                         </KeyboardAwareScrollView>
-                        <View style={{marginTop:'15%', backgroundColor: 'yellow' }} />
-                   <View style={homeStyle.innerContainer}>
-                        <Text style={homeStyle.textTitle}>Please select you city</Text>
-                        <RNPickerSelect
-                            placeholder={{
-                                label: 'Select city',
-                                value: null,
-                                fontSize: 18,
-                                backgroundColor:'yellow'
-                            }}
-                            
-                            placeholderTextColor={'red'}
-                            items={this.state.items1}
-                            onValueChange={(value) => {
-                                this.setState({
-                                    citySelected: value,
-                                });
-                            }}
-                            onUpArrow={() => {
-                                //this.inputRefs.name.focus();
-                            }}
-                            onDownArrow={() => {
-                                this.inputRefs.picker2.togglePicker();
-                            }}
-                            style={{padding: 20,}}
-                            value={this.state.citySelected}
-                            ref={(el) => {
-                                this.inputRefs.picker = el;
-                            }}
-                        />
+           <CardSection>
+            <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+                    this.refs.pickerDate.show();
+                  }}>
+                  {this.state.selectedDate}
+                </ButtonWithIcon>  
+              </CardSection>  
 
-                        <View style={{ paddingVertical:'10%', backgroundColor:'' }} />
+            <CardSection>
+            <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+                    this.refs.pickerTimeSlot.show();
+                  }}>
+                  {this.state.selectedTimeSlot}
+                </ButtonWithIcon> 
+              </CardSection>  
+          </Card>  
 
-                        <Text style={homeStyle.textTitle}>Please select your subCity</Text>
-                        <RNPickerSelect
-                            placeholder={{
-                                label: 'Select subcity',
-                                value: null,
-                            }}
-                            items={this.state.items2}
-                            onValueChange={(value) => {
-                                this.setState({
-                                    subcitySelected: value,
-                                });
-                            }}
-                            onUpArrow={() => {
-                                this.inputRefs.picker.togglePicker();
-                            }}
-                            onDownArrow={() => {
-                                this.inputRefs.picker3.togglePicker();
-                            }}
-                            style={ homeStyle.inputIOS }
-                            value={this.state.subcitySelected}
-                            ref={(el) => {
-                                this.inputRefs.picker2 = el;
-                            }}
-                />
-                <Text style={homeStyle.textTitle}>Please select type</Text>
-                        <RNPickerSelect
-                            placeholder={{
-                                label: 'Select type',
-                                value: null,
-                            }}
-                            items={this.state.items3}
-                            onValueChange={(value) => {
-                                this.setState({
-                                    typeSelected: value,
-                                });
-                            }}
-                            onUpArrow={() => {
-                                this.inputRefs.picker2.togglePicker();
-                            }}
-                            onDownArrow={() => {
-                                this.inputRefs.picker4.togglePicker();
-                            }}
-                            style={ homeStyle.inputIOS }
-                            value={this.state.typeSelected}
-                            ref={(el) => {
-                                this.inputRefs.picker3 = el;
-                            }}
-                />
-                <Text style={homeStyle.textTitle}>Please select date</Text>
-                        <RNPickerSelect
-                            placeholder={{
-                                label: 'Select date',
-                                value: null,
-                            }}
-                            items={this.state.items4}
-                            onValueChange={(value) => {
-                                this.setState({
-                                    dateSelected: value,
-                                });
-                            }}
-                            onUpArrow={() => {
-                                this.inputRefs.picker3.togglePicker();
-                            }}
-                            onDownArrow={() => {
-                                this.inputRefs.picker5.togglePicker();
-                            }}
-                            style={ homeStyle.inputIOS }
-                            value={this.state.dateSelected}
-                            ref={(el) => {
-                                this.inputRefs.picker4 = el;
-                            }}
-                />
-                <Text style={homeStyle.textTitle}>Please select type</Text>
-                                        <RNPickerSelect
-                                            placeholder={{
-                                                label: 'Select time',
-                                                value: null,
-                                            }}
-                                            items={this.state.items5}
-                                            onValueChange={(value) => {
-                                                this.setState({
-                                                    timeSelected: value,
-                                                });
-                                            }}
-                                            onUpArrow={() => {
-                                                this.inputRefs.picker4.togglePicker();
-                                            }}
-                                            onDownArrow={() => {
-                                                // this.inputRefs.picker4.togglePicker();
-                                            }}
-                                            style={ homeStyle.inputIOS }
-                                            value={this.state.timeSelected}
-                                            ref={(el) => {
-                                                this.inputRefs.picker5 = el;
-                                            }}
-                                />
-                <View style={{ paddingVertical: '5%', backgroundColor:'' }} />
-            
-            {/* <Text style={[homeStyle.textStyle, color='green']}> Slot available</Text> */}
+{/* Here defining all pickers for their type  */}
 
-                   <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
-                            <Button btnDirection={'left'} whenPress={this.onClickAddPatient.bind(this)}>
-                            Add Patient
-                            </Button>
-                    </CardSection>
+            <SimplePicker
+              ref={'pickerCity'}
+              options={arrayCity}
+              onSubmit={(option) => {
+                
+                this.setState({
+                  selectedCity: option,
+                  isDateSelected: false,
+                  isTimeSelected: false,
+                });
+               
+              }}
+            />
+    
+            <SimplePicker
+              ref={'pickerSubcity'}
+              options={arraySubCity}
+              onSubmit={(option) => {
+                this.setState({
+                  selectedSubCity: option,
+                  isTimeSelected: false,
+                });
+              }}
+            />
+             <SimplePicker
+              ref={'pickerType'}
+              options={arrayType}
+              onSubmit={(option) => {
+                this.setState({
+                  selectedType: option,
+                  isTimeSelected: false,
+                  
+                });
+              }}
+            />
+            <SimplePicker
+              ref={'pickerDate'}
+              options={arrayDate}
+              onSubmit={(option) => {
+                this.setState({
+                  selectedDate: option,
+                  isDateSelected: true,
+                });
+              }}
+            />
+          <SimplePicker
+              ref={'pickerTimeSlot'}
+              options={arrayTimeSlots}
+              onSubmit={(option) => {
+                this.setState({
+                  selectedTimeSlot: option,
+                  isTimeSelected: true,
+                });
+              }}
+            />
 
-                    <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} >
-                            <Button btnDirection={'left'} whenPress={this.onClickBook.bind(this)}>
-                            Book
-                            </Button>
-                    </CardSection>
-                </View>
-                </View>
+    {/* isTimeSelected?<Text>Slots Available</Text>:<Text> Checking </Text> */}
+
+    {/* <CardSection style={{flex: 1,flexDirection: 'row', justifyContent:'space-evenly'}} > */}
+
+ <TouchableOpacity style={homeStyle.buttonAddPatient} onPress={this.onClickAddPatient.bind(this)}>
+            <Text style={homeStyle.textStyleBottomBtn}> 
+            Add Patient
+            </Text>
+    </TouchableOpacity>
+
+        <TouchableOpacity style={homeStyle.buttonBook} onPress={this.onClickBook.bind(this)}>
+            <Text style={homeStyle.textStyleBottomBtn}> 
+            Book
+            </Text>
+    </TouchableOpacity>          
+
+            </KeyboardAwareScrollView>
+           
+          </View>
         );
-
-    }
+      }
+   
+    
     onClickBook(){
         console.log(' Book ');
         // Validate empty condition 
@@ -323,3 +217,26 @@ onClickTime(){
         
 }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#efecc9',
+    },
+  
+    welcome: {
+      fontSize: 20,
+      textAlign: 'center',
+      margin: 10,
+    },
+  
+    paragraph: {
+      textAlign: 'center',
+      color: '#002f2f',
+      marginBottom: 5,
+      fontWeight: 'bold',
+      fontSize: 18,
+    },
+  });

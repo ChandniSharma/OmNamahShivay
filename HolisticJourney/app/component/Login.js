@@ -137,7 +137,7 @@ export default class Login extends Component {
               )
          }
         // Temp  
-          this.props.navigation.navigate('Home',{response:this.state.response})
+           this.props.navigation.navigate('Home',{response:this.state.response})
 
   }
     onClickSignup(){

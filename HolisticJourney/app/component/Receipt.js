@@ -7,13 +7,14 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 import receiptStyle from '../styleFiles/receipt.style';
 import Button from './common/Button';
 import CardSection from './common/CardSection';
+import * as Animatable from 'react-native-animatable';
 
 export default class Receipt extends Component {
 
     render(){
         return(
             <View style={[loginStyle.Container]}> 
-                <Header />  
+                <Header isAnimatable={'No'} />  
                
           {/* <ScrollView> */}
             <View style={receiptStyle.container}>
@@ -25,7 +26,9 @@ export default class Receipt extends Component {
             </View>
             <View style={{alignItems:'center'}}>
                 <Text style={receiptStyle.textTitleTokenId}> Your Token ID is </Text>
-                <Text style={receiptStyle.textTokenID}> #12345678 </Text>
+                <Animatable.Text style={receiptStyle.textTokenID} animation="pulse" iterationCount={2} direction="alternate" delay={1000}>
+                   #12345678
+                </Animatable.Text>
             </View>
            
             <View style={{alignItems:'center'}}>

@@ -2,7 +2,7 @@ export default{
     flatList:{
       flex: 1,
       marginTop: 30,
-      backgroundColor: '#ffffff',
+      backgroundColor: 'transparant',
     },
     viewInner:{
         padding: 15,

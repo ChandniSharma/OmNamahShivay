@@ -37,6 +37,15 @@ const styles={
        
     //  alignSelf: 'stretch',
     },
+    buttonCenterStyle:{
+        flex: 0.5,
+        backgroundColor:'#ffffff',
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 13,
+        alignSelf: 'center',
+        height:40
+    },
     buttonRightStyle:{
         flex: 0.5,
          backgroundColor:'#ffffff',
@@ -45,7 +54,7 @@ const styles={
          borderRadius: 13,
          marginLeft: 5, 
          marginRight: 30,
-         height:40
+         height:40,
         
      //  alignSelf: 'stretch',
      },

@@ -23,35 +23,40 @@ const styles={
     container:{
        flex:1,
        flexDirection: 'row',
-       
+       backgroundColor:'transparent',
     },
     buttonStyle:{
        flex: 1,
         backgroundColor:'#ffffff',
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 13,
-        marginLeft: 30, 
-        marginRight: 5,
-        height:40
+        borderRadius: 18,
+        marginLeft: 10, 
+        marginRight: 10,
+        height:45,
+        // marginTop: -40,
+        
     //  alignSelf: 'stretch',
     },
     imageDown:{
         
-       width: 32,
-       height:32,
-        top: -32,
+       width: 20,
+       height:20,
+        top: -30,
        alignSelf: 'flex-end',
+       marginRight:'2%'
     },
      
     textStyle:{
       
       fontSize: 18,
       borderColor: 'black',
-      alignSelf: 'center',
-     // backgroundColor: '#ffffff',
+      alignSelf: 'flex-start',
+      backgroundColor: 'transparent',
       paddingTop: 10,
       paddingBottom: 10,
+      marginLeft:10,
+      color:'#656565'
     }
 }
 export default ButtonWithIcon;

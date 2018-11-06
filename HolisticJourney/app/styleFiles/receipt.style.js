@@ -16,7 +16,7 @@ export default{
        textTokenID:{
         color: 'red',
         alignItems: 'center',
-        fontSize: 16,
+        fontSize: 17,
         fontWeight: 'bold',
        },
        textTitleTokenId:{

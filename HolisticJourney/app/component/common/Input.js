@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { TextInput, View, Text} from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 
-const Input = ({label,value, onChangeText, placeholder, secureTextEntry,keyboardType, charLimit, error,prefix}) =>{
+const Input = ({label,value, onChangeText, placeholder, secureTextEntry,keyboardType, charLimit, error,prefix, onFocus}) =>{
 
     const {viewContainerStyle, labelStyle, textInputStyle,affixTextStyle } = styles;
     return(
@@ -15,6 +15,7 @@ const Input = ({label,value, onChangeText, placeholder, secureTextEntry,keyboard
                 textColor='#000000'
                 baseColor = '#656565'
                 fontSize={18}
+                onFocus={onFocus}
                 // characterRestriction={charLimit}
                 containerStyle={viewContainerStyle}
                 inputContainerStyle={textInputStyle}

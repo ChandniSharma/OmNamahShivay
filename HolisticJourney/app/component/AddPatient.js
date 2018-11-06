@@ -18,22 +18,35 @@ state = {
 }
 
 placeSubmitHandler = () => {
+    let alertMessage=''; 
     if(this.state.placeName.trim() === '' || this.state.mobile.trim() === '') {
     return;
-    }
-    console.log('patient array ',this.state.places.length)
-    if(this.state.places.length>4){
-       
+    }else{
+        if (mobile.length === 0 || this.state.mobile.length!=10) {
             Alert.alert(
                 '',
-                constants.msgPatientAddLimit,
+                constants.msgMobileNumber,
                 [
                   {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                 ],
                 { cancelable: false }
               )
               return;
+            } else{
+                if(this.state.places.length>4){
+                    Alert.alert(
+                        '',
+                        constants.msgPatientAddLimit,
+                        [
+                          {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                        ],
+                        { cancelable: false }
+                      )
+                       return;   
+                }
+            }
     }
+  
     this.setState(prevState => {
       return {
             places: prevState.places.concat({
@@ -82,7 +95,7 @@ onItemDeleted = (key) => {
 render() {
    return (
     <View style={loginStyle.Container}> 
-     <Header />  
+     <Header isAnimatable={'No'}/>  
     <View style={ styles.container }>
     <Text style= {addPatientStyle.textTitle}>
         Add Patient Detail
@@ -121,7 +134,7 @@ render() {
                 Note: You can add upto 5 patients.
             </Text>
             <CardSection style={{flex: 1,flexDirection: 'row', alignItems: 'center',}} >
-                        <ButtonBottom btnDirection={'left'} whenPress={this.onClickBack}>
+                        <ButtonBottom btnDirection={'left'} whenPress={()=> this.props.navigation.navigate('Home')}>
                         Back To Home
                         </ButtonBottom>
                     </CardSection>

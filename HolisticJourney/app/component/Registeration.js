@@ -113,7 +113,7 @@ export default class Registration extends Component {
         if (name.length === 0) {
             alertMessage = constants.msgName;
         } else {
-            if (mobile.length === 0 || mobile.length<10) {
+            if (mobile.length === 0 || mobile.length!=10) {
             alertMessage = constants.msgMobileNumber;
             } else {
                 if (pin.length === 0) {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import styles from '../../styleFiles/header.style';
+import styles from '../../styleFiles/headerHomeStyle.style';
 import * as Animatable from 'react-native-animatable';
 
 
@@ -22,6 +22,8 @@ if (props.isAnimatable === 'No') {
     )
 
 }
+
+
 
 export default Header;
 
