@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, View, Text,Alert, TextInput, StyleSheet} from 'react-native';
-import Header from './Home/HeaderHome';
+import Header from './common/Header';
 import loginStyle from '../styleFiles/login.style';
 import Button from './common/Button';
 import Card from './Home/CardHome';
@@ -9,7 +9,8 @@ import Input from './common/Input';
 import ButtonWithIcon from './common/ButtonWithIcon';
 import homeStyle from '../styleFiles/home.style';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
- import SimplePicker from 'react-native-simple-picker';
+import SimplePicker from 'react-native-simple-picker';
+import * as constants from '../Constants/Constants';
 
  const arrayCity = ['Bhopal', 'Indore', 'Khandwa'];
  const arraySubCity = ['Baikunth Nagar', 'Arera Colony', 'Habibganj'];
@@ -37,12 +38,102 @@ export default class Home extends Component {
             selectedDate: 'Click here to select date',
             selectedTimeSlot:'Click here to select time',
             selectedType:'Click here to select type',
+            isCitySelected:false,
+            isSubcitySelected:false,
+            isTypeSelected:false,
             isDateSelected:false,
             isTimeSelected: false,
+            isPatientAdded: false,
         } 
     }
        
     render() {
+
+      let buttonSubCity, buttonType, buttonDate, buttonTime;
+      if (this.state.isCitySelected) {
+        buttonSubCity = <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+          this.refs.pickerSubcity.show();
+        }}>
+         {this.state.selectedSubCity}
+       </ButtonWithIcon>
+      } else {
+        buttonSubCity = <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+          Alert.alert(
+            '',
+            constants.msgCitySelect,
+            [
+              {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            ],
+            { cancelable: false }
+          )
+        }}>
+         {this.state.selectedSubCity}
+       </ButtonWithIcon>
+      }
+      if(this.state.isSubcitySelected){
+        buttonType =  <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+          this.refs.pickerType.show();
+        }}>
+         {this.state.selectedType}
+        </ButtonWithIcon>  
+      }else{
+        buttonType =  <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+          Alert.alert(
+            '',
+            constants.msgSubCitySelect,
+            [
+              {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            ],
+            { cancelable: false }
+          )
+        }}>
+         {this.state.selectedType}
+         </ButtonWithIcon>  
+      }
+
+      if (this.state.isTypeSelected) {
+        buttonDate = <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+          this.refs.pickerDate.show();
+        }}>
+        {this.state.selectedDate}
+      </ButtonWithIcon> 
+      } else {
+        buttonDate = <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+          Alert.alert(
+            '',
+            constants.msgTypeSelect,
+            [
+              {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            ],
+            { cancelable: false }
+          )
+        }}>
+        {this.state.selectedDate}
+      </ButtonWithIcon> 
+      }
+
+      if (this.state.isDateSelected) {
+          buttonTime = <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+              this.refs.pickerTimeSlot.show();
+            }}>
+            {this.state.selectedTimeSlot}
+          </ButtonWithIcon> 
+      } else {
+            buttonTime = <ButtonWithIcon btnDirection={'left'} whenPress={() => {
+              Alert.alert(
+                '',
+                constants.msgDateSelect,
+                [
+                  {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                ],
+                { cancelable: false }
+              )
+            }}>
+            {this.state.selectedTimeSlot}
+          </ButtonWithIcon> 
+      }
+        
+
         return (
             <View style={loginStyle.Container}>
                         <Header />
@@ -55,38 +146,21 @@ export default class Home extends Component {
                  {this.state.selectedCity}
                </ButtonWithIcon>
           </CardSection>    
-         
+
           <CardSection>
-          <ButtonWithIcon btnDirection={'left'} whenPress={() => {
-                  this.refs.pickerSubcity.show();
-                }}>
-                 {this.state.selectedSubCity}
-               </ButtonWithIcon>
-               
+              {buttonSubCity}
           </CardSection>  
 
           <CardSection>
-          <ButtonWithIcon btnDirection={'left'} whenPress={() => {
-                  this.refs.pickerType.show();
-                }}>
-                 {this.state.selectedType}
-               </ButtonWithIcon>            
+                   {buttonType}
               </CardSection>  
 
            <CardSection>
-            <ButtonWithIcon btnDirection={'left'} whenPress={() => {
-                    this.refs.pickerDate.show();
-                  }}>
-                  {this.state.selectedDate}
-                </ButtonWithIcon>  
+            {buttonDate} 
               </CardSection>  
 
             <CardSection>
-            <ButtonWithIcon btnDirection={'left'} whenPress={() => {
-                    this.refs.pickerTimeSlot.show();
-                  }}>
-                  {this.state.selectedTimeSlot}
-                </ButtonWithIcon> 
+            {buttonTime} 
               </CardSection>  
           </Card>  
 
@@ -99,8 +173,9 @@ export default class Home extends Component {
                 
                 this.setState({
                   selectedCity: option,
-                  isDateSelected: false,
-                  isTimeSelected: false,
+                  isCitySelected: true,
+                  //  isDateSelected: false,
+                  
                 });
                
               }}
@@ -112,7 +187,8 @@ export default class Home extends Component {
               onSubmit={(option) => {
                 this.setState({
                   selectedSubCity: option,
-                  isTimeSelected: false,
+                  isSubcitySelected: true,
+                  // isDateSelected: false,
                 });
               }}
             />
@@ -122,7 +198,8 @@ export default class Home extends Component {
               onSubmit={(option) => {
                 this.setState({
                   selectedType: option,
-                  isTimeSelected: false,
+                  isTypeSelected: true,
+                   
                   
                 });
               }}
@@ -170,6 +247,14 @@ export default class Home extends Component {
         );
       }
    
+      onClickTime(){
+        if (this.state.isDateSelected){
+          this.refs.pickerTimeSlot.show();
+        }else{
+          console.log('Select time ')
+        }
+        
+      }
     
     onClickBook(){
         console.log(' Book ');
@@ -177,8 +262,49 @@ export default class Home extends Component {
         // Call api 
         const  {email,password} = this.state;
         this.setState({isLoading:true,error:'' }) ;
-        console.log(' Book ', this.state.response);
-        this.props.navigation.navigate('Receipt')
+
+       let alertMessage = '';
+        if (this.state.isCitySelected && this.state.isSubcitySelected && this.state.isTypeSelected && this.state.isDateSelected && this.state.isTimeSelected) {
+          this.props.navigation.navigate('Receipt')
+        } else {
+          if (!this.state.isCitySelected) {
+            alertMessage = constants.msgCitySelect;
+          } else {
+            if (!this.state.isSubcitySelected) {
+              alertMessage = constants.msgSubCitySelect;
+            } else {
+              if (!this.state.isTypeSelected) {
+                alertMessage = constants.msgTypeSelect;
+              } else {
+                if (!this.state.isDateSelected) {
+                  alertMessage = constants.msgDateSelect;
+                } else {
+                  if (!this.state.isTimeSelected) {
+                    alertMessage = constants.msgTimeSelect;
+                  } else {
+                    if (!this.state.isPatientAdded) {
+                      alertMessage = constants.msgAddPatient;
+                    } else {
+                      this.props.navigation.navigate('Receipt',{response:this.state.response})
+
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (alertMessage.length>1) {
+          Alert.alert(
+              '',
+              alertMessage,
+              [
+                {text: constants.titleOk, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              ],
+              { cancelable: false }
+            )
+       }
+       
  }
  onClickAddPatient(){
      console.log('On click add patient');
