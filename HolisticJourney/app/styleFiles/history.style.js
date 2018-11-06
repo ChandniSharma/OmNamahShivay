@@ -1,8 +1,8 @@
 export default{
     flatList:{
       flex: 1,
-      marginTop: 30,
-      backgroundColor: '#ffffff',
+       marginTop: '2%',
+      // backgroundColor: '#ffffff',
     },
     viewInner:{
         padding: 15,
