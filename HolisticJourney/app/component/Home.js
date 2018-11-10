@@ -31,6 +31,7 @@ export default class Home extends Component {
             // slots: ['2:00PM-3:00PM','4:00PM-6:00PM','7:30:00PM-9:00PM'],
             error:'',
             response:[{'id':1}],
+            arrayPatients:this.props.navigation.getParam('arrayP','N'),
             isLoading: false,
             isLoggedIn: false,
             selectedCity: 'Click here to select city',
@@ -44,10 +45,29 @@ export default class Home extends Component {
             isDateSelected:false,
             isTimeSelected: false,
             isPatientAdded: false,
+            arrayReceipt:[],
         } 
     }
-       
+       componentWillMount(){
+         console.log('Will m');
+           }
+       componentDidMount(){
+        console.log('Did  m');
+        // const { navigation } = this.props;
+        // const itemId = navigation.getParam('itemId', 'NO-ID');
+        // const otherParam = navigation.getParam('otherParam', 'some default value');
+    
+        // this.state.arrayPatients = this.props.navigation.state.params.arrayPatient;
+        // console.log('Did M arrayPatients ***', this.props.navigation.state.params);
+       }
     render() {
+
+      const { navigation } = this.props;
+      let arrayP = navigation.getParam('arrayP');
+
+      console.log('in render arrayP ', arrayP);
+  
+      // this.setState({arrayPatient:arrayP});
 
       let buttonSubCity, buttonType, buttonDate, buttonTime;
       if (this.state.isCitySelected) {
@@ -257,14 +277,22 @@ export default class Home extends Component {
       }
     
     onClickBook(){
-        console.log(' Book ');
+        console.log(' Book arry p ', this.state.arrayPatients.length>1?'greater than 1':'Less than');
         // Validate empty condition 
         // Call api 
         const  {email,password} = this.state;
         this.setState({isLoading:true,error:'' }) ;
 
        let alertMessage = '';
-        if (this.state.isCitySelected && this.state.isSubcitySelected && this.state.isTypeSelected && this.state.isDateSelected && this.state.isTimeSelected) {
+       
+       if (this.state.arrayPatients.length<2) {
+        alertMessage = constants.msgAddPatient;
+      } else {
+        // Pass selected data to receipt view 
+        this.props.navigation.navigate('Receipt',{response:this.state.response})
+
+      }
+     /*   if (this.state.isCitySelected && this.state.isSubcitySelected && this.state.isTypeSelected && this.state.isDateSelected && this.state.isTimeSelected) {
           this.props.navigation.navigate('Receipt')
         } else {
           if (!this.state.isCitySelected) {
@@ -282,9 +310,12 @@ export default class Home extends Component {
                   if (!this.state.isTimeSelected) {
                     alertMessage = constants.msgTimeSelect;
                   } else {
-                    if (!this.state.isPatientAdded) {
+                            // this.props.navigation.navigate('Receipt',{response:this.state.response})
+
+                    if (!this.state.arrayPatients.length>1) {
                       alertMessage = constants.msgAddPatient;
                     } else {
+                      // Pass selected data to receipt view 
                       this.props.navigation.navigate('Receipt',{response:this.state.response})
 
                     }
@@ -293,7 +324,7 @@ export default class Home extends Component {
               }
             }
           }
-        }
+        } */
         if (alertMessage.length>1) {
           Alert.alert(
               '',
@@ -304,11 +335,13 @@ export default class Home extends Component {
               { cancelable: false }
             )
        }
-       
+       //Temp  
+                          //  this.props.navigation.navigate('Receipt',{response:this.state.response})
+
  }
  onClickAddPatient(){
      console.log('On click add patient');
-     this.props.navigation.navigate('AddPatient',{response:this.state.response})
+     this.props.navigation.navigate('AddPatient',{patientData:this.state.arrayPatients})
 
  }
  onClickCity(){

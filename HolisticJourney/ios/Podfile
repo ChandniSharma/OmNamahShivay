@@ -16,6 +16,8 @@ pod 'Crashlytics', '~> 3.10.7'
     # Pods for testing
     pod 'Picker', :path => '../node_modules/react-native-picker'
 
+    pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   end
 
   target 'HolisticJourneyTests' do

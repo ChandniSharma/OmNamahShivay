@@ -16,13 +16,19 @@ state = {
     places: [],
     mobile: '',
 }
+ componentDidMount(){
+
+ }
+ componentWillMount(){
+     
+ }
 
 placeSubmitHandler = () => {
     let alertMessage=''; 
     if(this.state.placeName.trim() === '' || this.state.mobile.trim() === '') {
     return;
     }else{
-        if (mobile.length === 0 || this.state.mobile.length!=10) {
+        if (this.state.mobile.length === 0 || this.state.mobile.length!=10) {
             Alert.alert(
                 '',
                 constants.msgMobileNumber,
@@ -134,7 +140,10 @@ render() {
                 Note: You can add upto 5 patients.
             </Text>
             <CardSection style={{flex: 1,flexDirection: 'row', alignItems: 'center',}} >
-                        <ButtonBottom btnDirection={'left'} whenPress={()=> this.props.navigation.navigate('Home')}>
+                        <ButtonBottom btnDirection={'left'} whenPress={()=> this.props.navigation.navigate('Home',{
+        arrayP: this.state.places,
+        otherParam: 'anything you want here',
+      })}>
                         Back To Home
                         </ButtonBottom>
                     </CardSection>
@@ -144,13 +153,17 @@ render() {
     );
   }
   onClickBack(){
-    this.props.navigation.navigate('Home');
+      console.log('on click back in add patient ');
+    this.props.navigation.navigate('Home',{
+        itemId: 86,
+        otherParam: 'anything you want here',
+      });
    }
 }
 
 const styles = StyleSheet.create({
       container: {
-    	  paddingTop: 40,
+    	  paddingTop: '5%',
     	  justifyContent: 'flex-start',
     	  alignItems: 'center',
       },

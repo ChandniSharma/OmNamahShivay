@@ -1,6 +1,6 @@
 export default{
 innerContainer:{
-marginTop: '10%',
+marginTop: '2%',
 flex:0.4,
 alignItems: 'center',
 },
@@ -13,6 +13,7 @@ textTitle:{
    textNote:{
     color: '#656565',
     fontSize: 14,
+    paddingBottom: '-5%',
    },
 
    listContainer: {

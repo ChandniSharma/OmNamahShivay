@@ -1,7 +1,7 @@
 /** @format */
 import React, { Component } from 'react';
 
-import {AppRegistry} from 'react-native';
+import {AppRegistry, Image} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
 import { StackNavigator } from 'react-navigation';
@@ -14,6 +14,9 @@ import Profile from './app/component/Profile';
 import AppointmentList from './app/component/History/AppointmentList';
 import Volentierlist from './app/component/Volentier/VolentierList';
 import AddPatient from './app/component/AddPatient';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from './app/styleFiles/tabBarIcon.style';
+
 const HomeStack = StackNavigator({
   Home: Home,
   Receipt: Receipt,
@@ -23,6 +26,8 @@ const HomeStack = StackNavigator({
   headerMode: 'none',
   gesturesEnabled: false,
 });
+
+
 
 const TabNavigator =  createBottomTabNavigator({
   Home: HomeStack,
@@ -35,20 +40,29 @@ const TabNavigator =  createBottomTabNavigator({
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
       const { routeName } = navigation.state;
-      let iconName;
+      let image;
       if (routeName === 'Home') {
-        iconName = '';
-      } else if (routeName === 'Settings') {
-        iconName = '';
+        image = focused? require('./app/assets/home_active.png'): require('./app/assets/home_inactive.png');;
+      } else if (routeName === 'Profile') {
+        image = focused? require('./app/assets/settings_active.png'): require('./app/assets/settings_inactive.png');;
+      }else if (routeName === 'Volentierlist'){
+        image = focused? require('./app/assets/list_active.png'): require('./app/assets/list_inactive.png');
+      }else if (routeName === 'AppointmentList'){
+        image = focused? require('./app/assets/history_active.png'): require('./app/assets/history_inactive.png');
       }
-      // You can return any component that you like here! We usually use an
-      // icon component from react-native-vector-icons
-      // return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+     
+       return (
+        <Image 
+            source={image}
+            style={styles.homeIcon}
+        />
+    ); //<Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
     },
   }),
   tabBarOptions: {
     activeTintColor: 'tomato',
     inactiveTintColor: 'gray',
+    showLabel: false,
   },
 }
 );
