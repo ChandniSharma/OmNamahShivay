@@ -110,7 +110,7 @@ export default class Login extends Component {
                  alertMessage = constants.msgPin;
              } else {
                  if(confirmPin.length === 0){
-                    alertMessage = constants.confirmPin;
+                    alertMessage = constants.msgConfirmPin;
                  }else{
                      if (pin !== confirmPin) {
                          alertMessage = constants.msgPinNotSame;
@@ -137,7 +137,7 @@ export default class Login extends Component {
               )
          }
         // // Temp  
-        //    this.props.navigation.navigate('Home',{response:this.state.response})
+           // this.props.navigation.navigate('Home',{response:this.state.response})
 
   }
     onClickSignup(){

@@ -120,7 +120,7 @@ export default class Registration extends Component {
                     alertMessage = constants.msgPin;
                 } else {
                     if(confirmPin.length === 0){
-                    alertMessage = constants.confirmPin;
+                    alertMessage = constants.msgConfirmPin;
                     }else{
                         if (pin !== confirmPin) {
                             alertMessage = constants.msgPinNotSame;

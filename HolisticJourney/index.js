@@ -31,7 +31,7 @@ const HomeStack = StackNavigator({
 
 const TabNavigator =  createBottomTabNavigator({
   Home: HomeStack,
-  Volentierlist:Volentierlist,
+  VolentierList:Volentierlist,
   AppointmentList: AppointmentList,
   Settings: Profile,
  
@@ -45,7 +45,7 @@ const TabNavigator =  createBottomTabNavigator({
         image = focused? require('./app/assets/home_active.png'): require('./app/assets/home_inactive.png');;
       } else if (routeName === 'Settings') {
         image = focused? require('./app/assets/settings_active.png'): require('./app/assets/settings_inactive.png');;
-      }else if (routeName === 'Volentierlist'){
+      }else if (routeName === 'VolentierList'){
         image = focused? require('./app/assets/list_active.png'): require('./app/assets/list_inactive.png');
       }else if (routeName === 'AppointmentList'){
         image = focused? require('./app/assets/history_active.png'): require('./app/assets/history_inactive.png');
@@ -60,8 +60,8 @@ const TabNavigator =  createBottomTabNavigator({
     },
   }),
   tabBarOptions: {
-    activeTintColor: 'tomato',
-    inactiveTintColor: 'gray',
+    activeTintColor: '#c70301',
+    inactiveTintColor: '#838383',
     // showLabel: false,
   },
 }

@@ -106,7 +106,7 @@ export default class Profile extends Component {
                     alertMessage = constants.msgPinLength;
                  } else {
                     if(confirmPin.length === 0){
-                    alertMessage = constants.confirmPin;
+                    alertMessage = constants.msgConfirmPin;
                     }else{
                         if (pin !== confirmPin) {
                             alertMessage = constants.msgPinNotSame;

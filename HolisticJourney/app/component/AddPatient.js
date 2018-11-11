@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, TextInput, Button, FlatList, Text, Alert, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput, Button, FlatList, Text, Alert, Image, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import ListItem from './ListItem';
 import Header from './common/Header';
 import loginStyle from '../styleFiles/login.style';
@@ -9,6 +9,17 @@ import CardSection from './common/CardSection';
 import InputPatient from './InputPatient';
 import * as constants from '../Constants/Constants';
 
+const DismissKeyboardHOC = (Comp) => {
+    return ({ children, ...props }) => (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <Comp {...props}>
+          {children}
+        </Comp>
+      </TouchableWithoutFeedback>
+    );
+  };
+  const DismissKeyboardView = DismissKeyboardHOC(View)
+  
 export default class AddPatient extends Component {
 
 state = {
@@ -16,6 +27,7 @@ state = {
     places: [],
     mobile: '',
 }
+
  componentDidMount(){
 
  }
@@ -103,10 +115,14 @@ render() {
     <View style={loginStyle.Container}> 
      <Header isAnimatable={'No'}/>  
     <View style={ styles.container }>
-    <Text style= {addPatientStyle.textTitle}>
+    {/* <Text style= {addPatientStyle.textTitle}>
         Add Patient Detail
-    </Text>
-       <View style = { styles.inputContainer }>
+    </Text> */}
+
+ <DismissKeyboardView style = { styles.inputContainer }>
+
+ 
+       {/* <View style = { styles.inputContainer }> */}
 
               <InputPatient 
                     label={'Patient Name'}
@@ -131,7 +147,8 @@ render() {
         <TouchableOpacity style={styles.placeButton} onPress={ this.placeSubmitHandler  }>
                <Image source={require('../assets/plusIcon.png')} style={styles.imageStyle } />
             </TouchableOpacity>
-        </View>
+        {/* </View> */}
+        </DismissKeyboardView>
             <View style = { styles.listContainer }>
         { this.placesOutput() }
         </View>
@@ -163,7 +180,7 @@ render() {
 
 const styles = StyleSheet.create({
       container: {
-    	  paddingTop: '5%',
+    	   paddingTop: '5%',
     	  justifyContent: 'flex-start',
     	  alignItems: 'center',
       },
@@ -172,7 +189,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '100%',
-      marginTop:'8%'
+    //   marginTop:'8%'
       },
       placeInput: {
       width: '40%',
