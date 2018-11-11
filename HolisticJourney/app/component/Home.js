@@ -285,14 +285,14 @@ export default class Home extends Component {
 
        let alertMessage = '';
        
-       if (this.state.arrayPatients.length<2) {
-        alertMessage = constants.msgAddPatient;
-      } else {
-        // Pass selected data to receipt view 
-        this.props.navigation.navigate('Receipt',{response:this.state.response})
+      //  if (this.state.arrayPatients.length<2) {
+      //   alertMessage = constants.msgAddPatient;
+      // } else {
+      //   // Pass selected data to receipt view 
+      //   this.props.navigation.navigate('Receipt',{response:this.state.response})
 
-      }
-     /*   if (this.state.isCitySelected && this.state.isSubcitySelected && this.state.isTypeSelected && this.state.isDateSelected && this.state.isTimeSelected) {
+      // }
+        if (this.state.isCitySelected && this.state.isSubcitySelected && this.state.isTypeSelected && this.state.isDateSelected && this.state.isTimeSelected) {
           this.props.navigation.navigate('Receipt')
         } else {
           if (!this.state.isCitySelected) {
@@ -324,7 +324,7 @@ export default class Home extends Component {
               }
             }
           }
-        } */
+        } 
         if (alertMessage.length>1) {
           Alert.alert(
               '',

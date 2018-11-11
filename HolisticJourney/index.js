@@ -33,7 +33,7 @@ const TabNavigator =  createBottomTabNavigator({
   Home: HomeStack,
   Volentierlist:Volentierlist,
   AppointmentList: AppointmentList,
-  Profile: Profile,
+  Settings: Profile,
  
 },
 {
@@ -43,7 +43,7 @@ const TabNavigator =  createBottomTabNavigator({
       let image;
       if (routeName === 'Home') {
         image = focused? require('./app/assets/home_active.png'): require('./app/assets/home_inactive.png');;
-      } else if (routeName === 'Profile') {
+      } else if (routeName === 'Settings') {
         image = focused? require('./app/assets/settings_active.png'): require('./app/assets/settings_inactive.png');;
       }else if (routeName === 'Volentierlist'){
         image = focused? require('./app/assets/list_active.png'): require('./app/assets/list_inactive.png');
@@ -62,7 +62,7 @@ const TabNavigator =  createBottomTabNavigator({
   tabBarOptions: {
     activeTintColor: 'tomato',
     inactiveTintColor: 'gray',
-    showLabel: false,
+    // showLabel: false,
   },
 }
 );

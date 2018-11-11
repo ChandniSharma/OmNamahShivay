@@ -40,31 +40,36 @@ export default class Profile extends Component {
                 />
           </CardSection>
             <CardSection>
-                <Input 
+            <Input 
                 label={'Mobile'}
                 prefix={'+91'}
-                placeholder={'+918518016290'}
+                placeholder={'Mobile Number'}
                 value={this.state.mobile}
+                charLimit={10}
+                keyboardType='number-pad'
                 onChangeText={text => this.setState({mobile:text})}
                 />
           </CardSection>
           <CardSection>
-            <Input 
+          <Input  
             secureTextEntry
-            label={'Confirm pin'}
-            placeholder={'Confirm pin'}
-            value={this.state.confirmPin}
-            onChangeText={text => this.setState({confirmPin:text})}
+            label={'Pin'}
+            placeholder={'pin'}
+            value={this.state.pin}
+            charLimit={4}
+            keyboardType='number-pad'
+            onChangeText={text => this.setState({pin:text})}
             />
         </CardSection>
         <CardSection>
-            <Input 
+        <Input 
             secureTextEntry
-            label={'pin'}
-            placeholder={'pin'}
-            value={this.state.pin}
-            onChangeText={text => this.setState({pin:text})}
-
+            label={'Confirm pin'}
+            placeholder={'Confirm pin'}
+            charLimit={4}
+            value={this.state.confirmPin}
+            keyboardType='number-pad'
+            onChangeText={text => this.setState({confirmPin:text})}
             />
         </CardSection>
 

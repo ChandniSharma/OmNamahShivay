@@ -26,7 +26,7 @@ export default class Receipt extends Component {
             </View>
             <View style={{alignItems:'center'}}>
                 <Text style={receiptStyle.textTitleTokenId}> Your Token ID is </Text>
-                <Animatable.Text style={receiptStyle.textTokenID} animation="zoomIn" iterationCount={5} direction="alternate" delay={0}>
+                <Animatable.Text style={receiptStyle.textTokenID} animation="zoomIn" iterationCount={3} direction="alternate" delay={0}>
                    #12345678
                 </Animatable.Text>
             </View>
